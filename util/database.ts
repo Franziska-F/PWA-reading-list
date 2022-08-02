@@ -38,17 +38,27 @@ export type User = {
   username: string;
 };
 
-export default async function registerUser(username: string, password_hash: string) {
-const [user] = await sql <[User]>`INSERT INTO
+export async function registerUser(username: string, passwordHash: string) {
+  const [user] = await sql<[User]>`INSERT INTO
 users (username, password_hash)
 VALUES
 (
-  ${username}, ${password_hash}
+  ${username}, ${passwordHash}
 )
 RETURNING
 id,
-username`
-;
-return user;
+username`;
+  console.log('DB', user);
+  return user;
+}
 
+export async function createSession(userId: number, sessionToken: string) {
+  const session = await sql`INSERT INTO
+sessions (user_id, session_token)
+VALUES
+(${userId}, ${sessionToken})
+RETURNING
+id,
+session_token`;
+  return session;
 }
