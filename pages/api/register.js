@@ -1,7 +1,11 @@
 import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { serializedSessionTokenCookie } from '../../util/cookies';
-import { createSession, registerUser } from '../../util/database';
+import {
+  createSession,
+  getUserByUsername,
+  registerUser,
+} from '../../util/database';
 
 export default async function register(req, res) {
   if (req.method === 'POST') {
@@ -16,15 +20,26 @@ export default async function register(req, res) {
       });
       return;
     }
+
+
     const user = req.body;
 
     const username = user.username;
+
+     if (await getUserByUsername(username)) {
+      res.status(401).json({
+        errors: [{ message: 'This username is already taken'}],
+      });
+      return;
+
+     }
 
     const passwordHash = await bcrypt.hash(req.body.password, 12);
 
     // register new User
     const newUser = await registerUser(username, passwordHash);
-    
+
+
     // session token
 
     const sessionToken = crypto.randomBytes(80).toString('base64');

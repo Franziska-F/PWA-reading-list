@@ -62,3 +62,18 @@ id,
 session_token`;
   return session;
 }
+
+// Get user by username
+
+export async function getUserByUsername(username: string) {
+  if (!username) return undefined;
+  const [user] = await sql<[User | undefined]>`
+  SELECT
+  id,
+  username
+  FROM
+  users
+  WHERE
+  username = ${username}`;
+  return user
+}
