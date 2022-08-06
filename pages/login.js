@@ -1,11 +1,14 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState('');
+  const [errors, setErrors] = useState([]);
 
-  async function loginHandler(username, password) {
+  const router = useRouter();
+
+  async function loginHandler() {
     const loginResponse = fetch('/login', {
       method: 'POST',
       headers: {
@@ -23,7 +26,19 @@ export default function Login() {
       return;
     }
 
-    // return to is missing
+    const returnTo = router.query.returnTo;
+
+    if (
+      returnTo &&
+      !Array.isArray(returnTo) &&
+      // Security: Validate returnTo parameter against valid path
+      // (because this is untrusted user input)
+      /^\/[a-zA-Z0-9-?=/]*$/.test(returnTo)
+    ) {
+      await router.push(returnTo);
+    } else {
+      await router.push(`/`);
+    }
   }
 
   return (

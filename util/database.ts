@@ -75,5 +75,21 @@ export async function getUserByUsername(username: string) {
   users
   WHERE
   username = ${username}`;
-  return user
+  return user;
+}
+
+// Get user with passwordhash by username
+
+export async function getUserWithHashByUsername(username: string) {
+  if (!username) return undefined;
+  const userWithHash = await sql`
+  SELECT
+  id,
+  username
+  password_hash
+  FROM
+  users
+  WHERE
+  username = ${username}`;
+  return userWithHash;
 }
