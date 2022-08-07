@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { serializedSessionTokenCookie } from '../../util/cookies';
 import { createSession, getUserWithHashByUsername } from '../../util/database';
@@ -27,7 +28,7 @@ export default async function login(req, res) {
       req.body.password,
       userWithPasswordHash.password_hash,
     );
-    console.log(res);
+
     if (!passwordMatch) {
       res
         .status(401)
@@ -39,9 +40,11 @@ export default async function login(req, res) {
 
     const token = crypto.randomBytes(80).toString('base64');
 
-    const session = createSession(userId, token);
-
-    const serializedCookie = await serializedSessionTokenCookie(session.token);
+    const session = await createSession(userId, token);
+   
+    const serializedCookie = await serializedSessionTokenCookie(
+      session.session_token,
+    );
 
     res
       .status(200)

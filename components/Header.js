@@ -8,6 +8,7 @@ export default function Header() {
 
         <Link href="/login">Login</Link>
         <Link href="/readingList">Deine Leseliste</Link>
+        <Link href="/logout">Logout</Link>
       </div>
     </div>
   );

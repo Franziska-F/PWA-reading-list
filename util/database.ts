@@ -53,13 +53,28 @@ username`;
 }
 
 export async function createSession(userId: number, sessionToken: string) {
-  const session = await sql`INSERT INTO
+  const [session] = await sql`INSERT INTO
 sessions (user_id, session_token)
 VALUES
 (${userId}, ${sessionToken})
 RETURNING
 id,
 session_token`;
+  return session;
+}
+
+// Delete session
+
+export async function deleteSession(token: string) {
+  const [session] = await sql`
+  DELETE FROM
+sessions
+WHERE
+
+sessions.session_token = ${token}
+
+RETURNING *`;
+
   return session;
 }
 
@@ -82,14 +97,44 @@ export async function getUserByUsername(username: string) {
 
 export async function getUserWithHashByUsername(username: string) {
   if (!username) return undefined;
-  const userWithHash = await sql`
+  const [userWithHash] = await sql`
   SELECT
-  id,
-  username
-  password_hash
+ *
   FROM
   users
   WHERE
   username = ${username}`;
+
   return userWithHash;
+}
+
+// GET user with valid session by userId
+
+export async function getValidUser(sessionToken: string) {
+  if (!sessionToken) return undefined;
+  const [validUser] = await sql`
+  SELECT
+  users.id,
+  users.username
+  FROM
+  users, sessions
+  WHERE sessions.session_token = ${sessionToken} AND sessions.user_id
+  = users.id AND sessions.expiry_timestamp > now()
+   `;
+
+  // delte expired sessions
+  return validUser;
+}
+
+// POST book on readingList
+
+export async function putBookonList(userId: number, bookId: string) {
+  const book = await sql`
+  INSERT INTO
+  books (user_id, book_id, current_status)
+  VALUES
+  (${userId}, ${bookId}, 'reading' )
+  RETURNING
+  *`;
+  return book;
 }

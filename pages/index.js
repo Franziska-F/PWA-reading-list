@@ -18,6 +18,18 @@ export default function Home() {
         console.log('error');
       });
   }
+  async function putOnList(bookId) {
+    const onListResponse = await fetch('/api/books', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        bookId: bookId,
+      }),
+    });
+
+    const onListResponseBody = await onListResponse.json();
+  }
+
   return (
     <>
       <h1 className="text-center my-4">Was willst du als nächstes lesen?</h1>
@@ -70,6 +82,12 @@ export default function Home() {
                     </p>
                   </div>
                 </a>
+                <button
+                  className="bg-yellow-300 w-6 h-6 rounded-md text-black my-4 m-4"
+                  onClick={() => putOnList(item.id)}
+                >
+                  📚
+                </button>
               </div>
             );
           })}

@@ -9,7 +9,7 @@ export default function Login() {
   const router = useRouter();
 
   async function loginHandler() {
-    const loginResponse = fetch('/login', {
+    const loginResponse = fetch('/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -20,6 +20,7 @@ export default function Login() {
       }),
     });
     const loginResponseBody = (await loginResponse).json();
+    console.log('login', loginResponseBody);
 
     if ('errors' in loginResponseBody) {
       setErrors(loginResponseBody.errors);
