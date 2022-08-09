@@ -138,3 +138,18 @@ export async function putBookonList(userId: number, bookId: string) {
   *`;
   return book;
 }
+
+// Get all bookIds of one user
+
+export async function getBooksToRead(userId: number) {
+  const books = await sql`
+  SELECT
+ user_id, book_id
+  FROM
+  books
+  WHERE
+  user_id = ${userId}
+  AND current_status = 'reading'`;
+
+  return books;
+}
