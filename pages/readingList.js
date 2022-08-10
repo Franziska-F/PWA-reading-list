@@ -29,8 +29,9 @@ export default function ReadingList(props) {
             {' '}
             <p>{item.volumeInfo.title}</p>
             <p>
-              {item.volumeInfo.authors[0]? item.volumeInfo.authors[0] :
-              'Author unknowen'}
+              {item.volumeInfo.authors[0]
+                ? item.volumeInfo.authors[0]
+                : 'Author unknowen'}
             </p>
             {item.volumeInfo.imageLinks !== undefined ? (
               <img
@@ -64,12 +65,10 @@ export async function getServerSideProps(context) {
     bookId.map(async (item) => {
       const res = await fetch(
         `https://books.googleapis.com/books/v1/volumes/${item.book_id}`,
-      ); // Send request for each id
+      );
       return await res.json();
-      //console.log(data.volumeInfo.title);
     }),
   );
-  console.log('test', test);
 
   if (user) {
     return {
