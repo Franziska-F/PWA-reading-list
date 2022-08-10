@@ -4,29 +4,49 @@ import { getBooksToRead, getValidUser } from '../util/database';
 export default function ReadingList(props) {
   const [list, setList] = useState([]);
 
- // useEffect(() => {
- //   const test = async () => {
- //     await props.books.map(async (item) => {
- //       const res = await fetch(
- //         `https://books.googleapis.com/books/v1/volumes/${item.book_id}`,
- //       );
- //       const data = await res.json();
- //       console.log(res);
- //       setList(data);
- //     });
- //   };
-
-  //   test().catch(() => {
-  //     console.log('error');
-  //   });
-  // }, [props.books]);
+  useEffect(() => {
+    //   async function test() {
+    //     await props.books.map(async (item) => {
+    //       const res = await fetch(
+    //         `https://books.googleapis.com/books/v1/volumes/${item.book_id}`,
+    //       ); // Send request for each id
+    //       const data = await res.json();
+    //       console.log(data.volumeInfo.title);
+    //       setList(data.volumeInfo.title);
+    //       console.log('list', list);
+    //     });
+    //   }
+    //   test();
+  }, [props.books]);
 
   return (
     <div>
       <h1>Deine Leseliste</h1>
-      {console.log(props.test)}
-      {list.map((item) => {
-        return <p key={item.volumeInfo.title}>{item.volumeInfo.title}</p>;
+
+      {props.books.map((item) => {
+        return (
+          <div key={item.id}>
+            {' '}
+            <p>{item.volumeInfo.title}</p>
+            <p>
+              {item.volumeInfo.authors[0]? item.volumeInfo.authors[0] :
+              'Author unknowen'}
+            </p>
+            {item.volumeInfo.imageLinks !== undefined ? (
+              <img
+                className="rounded"
+                src={
+                  item.volumeInfo.imageLinks !== undefined
+                    ? item.volumeInfo.imageLinks.thumbnail
+                    : ''
+                }
+                alt="bookcover"
+              />
+            ) : (
+              <p>No cover available!</p>
+            )}
+          </div>
+        );
       })}
     </div>
   );
@@ -40,26 +60,27 @@ export async function getServerSideProps(context) {
 
   console.log(bookId);
 
-  const responses = await Promise.all(
+  const test = await Promise.all(
     bookId.map(async (item) => {
       const res = await fetch(
         `https://books.googleapis.com/books/v1/volumes/${item.book_id}`,
       ); // Send request for each id
+      return await res.json();
+      //console.log(data.volumeInfo.title);
     }),
   );
-
-  // console.log(responses);
+  console.log('test', test);
 
   if (user) {
     return {
       props: {
         user: user,
-        books: bookId,
+        books: test,
       },
     };
   }
 
   return {
-    props: { books: bookId },
+    props: {},
   };
 }
