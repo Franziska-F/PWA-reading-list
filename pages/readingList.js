@@ -21,34 +21,39 @@ export default function ReadingList(props) {
 
   return (
     <div>
-      <h1>Deine Leseliste</h1>
-
-      {props.books.map((item) => {
-        return (
-          <div key={item.id}>
-            {' '}
-            <p>{item.volumeInfo.title}</p>
-            <p>
-              {item.volumeInfo.authors[0]
-                ? item.volumeInfo.authors[0]
-                : 'Author unknowen'}
-            </p>
-            {item.volumeInfo.imageLinks !== undefined ? (
-              <img
-                className="rounded"
-                src={
-                  item.volumeInfo.imageLinks !== undefined
-                    ? item.volumeInfo.imageLinks.thumbnail
-                    : ''
-                }
-                alt="bookcover"
-              />
-            ) : (
-              <p>No cover available!</p>
-            )}
-          </div>
-        );
-      })}
+      <h1 className="text-center m-4">Deine Leseliste</h1>
+      <div>
+        {props.books.map((item) => {
+          return (
+            <div key={item.id} className="flex mt-8 overflow-auto">
+              {' '}
+              {item.volumeInfo.imageLinks !== undefined ? (
+                <img
+                  className="rounded m-4"
+                  src={
+                    item.volumeInfo.imageLinks !== undefined
+                      ? item.volumeInfo.imageLinks.thumbnail
+                      : ''
+                  }
+                  alt="bookcover"
+                />
+              ) : (
+                <p>No cover available!</p>
+              )}
+              <div className="p-4">
+                <p>{item.volumeInfo.title}</p>
+                <p>
+                  {item.volumeInfo.authors[0]
+                    ? item.volumeInfo.authors[0]
+                    : 'Author unknowen'}
+                </p>
+                <button className="p-2 m-2 rounded">🐝</button>
+                <button>❌</button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
