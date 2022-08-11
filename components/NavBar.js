@@ -5,24 +5,24 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-yellow-600 static max-h-14">
+    <div className="bg-yellow-600 h-14">
       <div className="hidden md:flex justify-evenly">
         <span>📚</span>12
         <Link href="/register">Register</Link>
         <Link href="/login">Login</Link>
         <Link href="/logout">Logout</Link>
       </div>
-      <div className="flex justify-between static md:hidden">
+      <div className="flex justify-between relative md:hidden">
         <div>
           <span>📚</span>12
         </div>
-        <div>
+        <div className="realative">
           <Link href="/readingList">Deine Leseliste</Link>
         </div>
         <button
           className={
-           ! isOpen
-              ? 'hamburger-icon p-4 space-y-2 bg-gray-600 rounded shadow'
+            !isOpen
+              ? 'hamburger-icon p-4 space-y-2 bg-gray-600 rounded shadow h-14'
               : 'hidden'
           }
           onClick={() => setIsOpen(true)}
@@ -31,18 +31,24 @@ export default function Header() {
           <span className="block w-8 h-0.5 bg-gray-100" />
           <span className="block w-8 h-0.5 bg-gray-100" />
         </button>
-        <div className={isOpen ? '' : 'hidden'}>
+        <div className={isOpen ? '  ' : 'hidden'}>
           {' '}
           <button
-            className="close-icon absolute top-0 right-0 px-8 py-8"
+            className="close-icon absolute top-0 right-0  bg-gray-600 h-14 w-14"
             onClick={() => setIsOpen(false)}
           >
             ❌
           </button>
-          <div className="flex flex-col absolut bg-black z-10 text-white h-80 w-80">
-            <Link href="/register">Register</Link>
-            <Link href="/login">Login</Link>
-            <Link href="/logout">Logout</Link>
+          <div
+            className="flex  bg-black/75 absolute right-0 top-14 z-10 text-white h-80 w-80"
+            onClick={() => setIsOpen(false)}
+          >
+            <div className=" flex flex-col p-4 w-full text-center">
+              <Link href="/register">Register</Link>
+              <Link href="/login">Login</Link>
+              <Link href="/logout">Logout</Link>
+              <Link href="/">Home</Link>
+            </div>
           </div>
         </div>
       </div>
