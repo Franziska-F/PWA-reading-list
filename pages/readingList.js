@@ -12,10 +12,9 @@ export default function ReadingList(props) {
       },
     });
     const newBookList = await bookList.json();
-    console.log('page', newBookList);
+
     const newState = list.filter((item) => item.id !== newBookList.book_id);
-    console.log(newState);
-    console.log('list', list);
+
     setList(newState);
   }
 
@@ -64,7 +63,7 @@ export async function getServerSideProps(context) {
 
   const bookId = await JSON.parse(JSON.stringify(responseBookId));
 
-  console.log(bookId);
+ 
 
   const test = await Promise.all(
     bookId.map(async (item) => {

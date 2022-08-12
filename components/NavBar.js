@@ -1,20 +1,23 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function Header() {
+export default function Header(props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [bookCount, setBookCount] = useState(props.books);
 
   return (
     <div className="bg-yellow-600 h-14">
       <div className="hidden md:flex justify-evenly">
-        <span>📚</span>12
+        <span>📚</span>
+        <span>{bookCount.length}</span>
         <Link href="/register">Register</Link>
         <Link href="/login">Login</Link>
         <Link href="/logout">Logout</Link>
       </div>
       <div className="flex justify-between relative md:hidden">
         <div>
-          <span>📚</span>12
+          {console.log('bookCount', [bookCount])}
+          <span>📚</span> <span>{bookCount.length}</span>
         </div>
         <div className="realative">
           <Link href="/readingList">Deine Leseliste</Link>

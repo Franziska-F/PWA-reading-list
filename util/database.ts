@@ -162,6 +162,6 @@ FROM books
 WHERE
 book_id = ${bookId} AND user_id = ${userId}
 RETURNING *`;
-  console.log('DB', updatedBooks);
+
   return updatedBooks;
 }
