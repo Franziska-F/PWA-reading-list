@@ -2,28 +2,28 @@ import { useEffect, useState } from 'react';
 import { getBooksToRead, getValidUser } from '../util/database';
 
 export default function ReadingList(props) {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(props.books);
 
-  useEffect(() => {
-    //   async function test() {
-    //     await props.books.map(async (item) => {
-    //       const res = await fetch(
-    //         `https://books.googleapis.com/books/v1/volumes/${item.book_id}`,
-    //       ); // Send request for each id
-    //       const data = await res.json();
-    //       console.log(data.volumeInfo.title);
-    //       setList(data.volumeInfo.title);
-    //       console.log('list', list);
-    //     });
-    //   }
-    //   test();
-  }, [props.books]);
+  async function deleteHandler(id) {
+    const bookList = await fetch(`../api/books/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const newBookList = await bookList.json();
+    console.log('page', newBookList);
+    const newState = list.filter((item) => item.id !== newBookList.book_id);
+    console.log(newState);
+    console.log('list', list);
+    setList(newState);
+  }
 
   return (
     <div>
       <h1 className="text-center m-4">Deine Leseliste</h1>
       <div>
-        {props.books.map((item) => {
+        {list.map((item) => {
           return (
             <div key={item.id} className="flex mt-8 overflow-auto">
               {' '}
@@ -48,7 +48,7 @@ export default function ReadingList(props) {
                     : 'Author unknowen'}
                 </p>
                 <button className="p-2 m-2 rounded">🐝</button>
-                <button>❌</button>
+                <button onClick={() => deleteHandler(item.id)}>❌</button>
               </div>
             </div>
           );

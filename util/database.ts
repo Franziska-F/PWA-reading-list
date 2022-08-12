@@ -144,7 +144,7 @@ export async function putBookonList(userId: number, bookId: string) {
 export async function getBooksToRead(userId: number) {
   const books = await sql`
   SELECT
- user_id, book_id
+ *
   FROM
   books
   WHERE
@@ -152,4 +152,16 @@ export async function getBooksToRead(userId: number) {
   AND current_status = 'reading'`;
 
   return books;
+}
+
+// Delte a book from readingList by bookID
+export async function deleteBookById(bookId: string, userId: number) {
+  const [updatedBooks] = await sql`
+DELETE
+FROM books
+WHERE
+book_id = ${bookId} AND user_id = ${userId}
+RETURNING *`;
+  console.log('DB', updatedBooks);
+  return updatedBooks;
 }
