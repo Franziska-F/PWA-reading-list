@@ -16,6 +16,8 @@ export default function ReadingList(props) {
     const newState = list.filter((item) => item.id !== newBookList.book_id);
 
     setList(newState);
+   
+    props.setBookList(newState);
   }
 
   return (
@@ -62,8 +64,6 @@ export async function getServerSideProps(context) {
   const responseBookId = await getBooksToRead(user.id);
 
   const bookId = await JSON.parse(JSON.stringify(responseBookId));
-
- 
 
   const test = await Promise.all(
     bookId.map(async (item) => {

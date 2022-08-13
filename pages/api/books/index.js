@@ -19,6 +19,7 @@ export default async function bookHandler(req, res) {
     const bookId = req.body.bookId;
 
     const createBook = await putBookonList(user.id, bookId);
+    return res.status(200).json(createBook);
   } else {
     res.status(405).json({ errors: [{ message: 'method not allowed' }] });
   }

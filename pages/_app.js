@@ -3,29 +3,31 @@ import { useCallback, useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps }) {
-  const [books, setBooks] = useState([]);
+  const [bookList, setBookList] = useState([]);
 
-  useEffect(() => {
-    async function displayBookCount() {
+
+    const displayBookCount = useCallback(async () => {
       const bookCountResponse = await fetch('../api/books');
 
       const bookCountResponseBody = await bookCountResponse.json();
       console.log('test', bookCountResponseBody);
-      setBooks(bookCountResponseBody);
-    }
-    displayBookCount().catch(() => {
-      console.log('Fetch fails');
-    });
+      setBookList(bookCountResponseBody);
+
   }, []);
 
-  // useEffect(() => {
-  //   displayBookCount().catch(() => console.log('fetch fails'));
-  // }, [displayBookCount]);
+   useEffect(() => {
+     displayBookCount().catch(() => console.log('fetch fails'));
+   }, [displayBookCount]);
 
   return (
-    <Layout books={books}>
+    <Layout bookList={bookList} setBookList={setBookList}>
       {' '}
-      <Component {...pageProps} />
+      <Component
+        {...pageProps}
+        bookList={bookList}
+        setBookList={setBookList}
+        displayBookCount={displayBookCount}
+      />
     </Layout>
   );
 }

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function Home() {
+export default function Home(props) {
   const [title, setTitle] = useState('');
   const [result, setResult] = useState([]);
 
@@ -28,6 +28,7 @@ export default function Home() {
     });
 
     const onListResponseBody = await onListResponse.json();
+    props.displayBookCount();
   }
 
   return (

@@ -3,21 +3,21 @@ import { useState } from 'react';
 
 export default function Header(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [bookCount, setBookCount] = useState(props.books);
+  const [bookCount, setBookCount] = useState(props.bookList);
 
   return (
     <div className="bg-yellow-600 h-14">
       <div className="hidden md:flex justify-evenly">
         <span>📚</span>
-        <span>{bookCount.length}</span>
+        <span>{bookCount}</span>
         <Link href="/register">Register</Link>
         <Link href="/login">Login</Link>
         <Link href="/logout">Logout</Link>
       </div>
       <div className="flex justify-between relative md:hidden">
         <div>
-          {console.log('bookCount', [bookCount])}
-          <span>📚</span> <span>{bookCount.length}</span>
+          {console.log('bookCount', bookCount)}
+          <span>📚</span> <span>{props.bookList.length}</span>
         </div>
         <div className="realative">
           <Link href="/readingList">Deine Leseliste</Link>
