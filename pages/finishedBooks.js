@@ -1,39 +1,12 @@
-import { useEffect, useState } from 'react';
-import { getBooksToRead, getValidUser } from '../util/database';
+import { useState } from 'react';
+import { getFinishedBooks, getValidUser } from '../util/database';
 
-export default function ReadingList(props) {
-  const [list, setList] = useState(props.books);
-
-  async function deleteHandler(id) {
-    const bookList = await fetch(`../api/books/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const newBookList = await bookList.json();
-
-    const newState = list.filter((item) => item.id !== newBookList.book_id);
-
-    setList(newState);
-
-    props.setBookList(newState);
-  }
-
-  async function doneHandler(id) {
-     await fetch(`../api/books/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-    });
-
-    const newState = list.filter((item) => item.current_status === 'reading');
-    setList(newState);
-    props.displayBookCount();
-  }
+export default function FinishedBooks(props) {
+  const [list, setList] = useState(props.finishedBooks);
 
   return (
     <div>
-      <h1 className="text-center m-4">Deine Leseliste</h1>
+      <h1 className="text-center m-4">Gelesene Bücher</h1>
       <div>
         {list.map((item) => {
           return (
@@ -59,17 +32,8 @@ export default function ReadingList(props) {
                     ? item.volumeInfo.authors[0]
                     : 'Author unknowen'}
                 </p>
-                <button
-                  className="p-2 m-2 rounded"
-                  onClick={() =>
-                    doneHandler(item.id).catch(() => {
-                      console.log('PUT request failed');
-                    })
-                  }
-                >
-                  🐝
-                </button>
-                <button onClick={() => deleteHandler(item.id)}>❌</button>
+
+                {/*} <button onClick={() => deleteHandler(item.id)}>❌</button> {*/}
               </div>
             </div>
           );
@@ -81,11 +45,11 @@ export default function ReadingList(props) {
 export async function getServerSideProps(context) {
   const user = await getValidUser(context.req.cookies.sessionToken);
 
-  const responseBookId = await getBooksToRead(user.id);
+  const responseBookId = await getFinishedBooks(user.id);
 
   const bookId = await JSON.parse(JSON.stringify(responseBookId));
 
-  const test = await Promise.all(
+  const books = await Promise.all(
     bookId.map(async (item) => {
       const res = await fetch(
         `https://books.googleapis.com/books/v1/volumes/${item.book_id}`,
@@ -98,7 +62,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         user: user,
-        books: test,
+        finishedBooks: books,
       },
     };
   }

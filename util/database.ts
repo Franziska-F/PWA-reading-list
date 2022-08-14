@@ -154,6 +154,21 @@ export async function getBooksToRead(userId: number) {
   return books;
 }
 
+// Get all finished books of one user
+
+export async function getFinishedBooks(userId: number) {
+  const finishedBooks = await sql`
+  SELECT
+ *
+  FROM
+  books
+  WHERE
+  user_id = ${userId}
+  AND current_status = 'done'`;
+
+  return finishedBooks;
+}
+
 // Delte a book from readingList by bookID
 export async function deleteBookById(bookId: string, userId: number) {
   const [updatedBooks] = await sql`

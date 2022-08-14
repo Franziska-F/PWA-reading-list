@@ -13,6 +13,7 @@ export default function Header(props) {
         <Link href="/register">Register</Link>
         <Link href="/login">Login</Link>
         <Link href="/logout">Logout</Link>
+        <Link href="/finishedBooks">Gelesene Bücher</Link>
       </div>
       <div className="flex justify-between relative md:hidden">
         <div>
@@ -51,6 +52,7 @@ export default function Header(props) {
               <Link href="/login">Login</Link>
               <Link href="/logout">Logout</Link>
               <Link href="/">Home</Link>
+              <Link href="/finishedBooks">Gelesene Bücher</Link>
             </div>
           </div>
         </div>
