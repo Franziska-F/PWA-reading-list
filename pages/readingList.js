@@ -16,8 +16,19 @@ export default function ReadingList(props) {
     const newState = list.filter((item) => item.id !== newBookList.book_id);
 
     setList(newState);
-   
+
     props.setBookList(newState);
+  }
+
+  async function doneHandler(id) {
+    const finishedBook = await fetch(`../api/books/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const uptdatedBookList = await finishedBook.json();
+    const newState = list.filter((item) => item.current_status === 'reading');
+    setList(newState);
+    props.displayBookCount();
   }
 
   return (
@@ -48,7 +59,16 @@ export default function ReadingList(props) {
                     ? item.volumeInfo.authors[0]
                     : 'Author unknowen'}
                 </p>
-                <button className="p-2 m-2 rounded">🐝</button>
+                <button
+                  className="p-2 m-2 rounded"
+                  onClick={() =>
+                    doneHandler(item.id).catch(() => {
+                      console.log('PUT request failed');
+                    })
+                  }
+                >
+                  🐝
+                </button>
                 <button onClick={() => deleteHandler(item.id)}>❌</button>
               </div>
             </div>

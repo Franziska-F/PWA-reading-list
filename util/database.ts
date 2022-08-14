@@ -165,3 +165,19 @@ RETURNING *`;
 
   return updatedBooks;
 }
+
+// Change state of book in reading list by bookId
+
+export async function changeBookStatusById(bookId: string, userId: number) {
+  const finishedBook = await sql`
+  UPDATE
+  books
+  SET
+  current_status = 'done'
+  WHERE
+  user_id = ${userId} AND
+  book_id = ${bookId}
+  RETURNING
+  *`;
+  return finishedBook;
+}
