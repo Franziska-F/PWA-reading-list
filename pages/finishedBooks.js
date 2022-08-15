@@ -2,13 +2,30 @@ import { useState } from 'react';
 import { getFinishedBooks, getValidUser } from '../util/database';
 
 export default function FinishedBooks(props) {
-  const [list, setList] = useState(props.finishedBooks);
+  const [finishedList, setFinishedList] = useState(props.finishedBooks);
+
+  async function deleteHandler(id) {
+    const bookList = await fetch(`../api/books/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const newBookList = await bookList.json();
+
+    const newState = finishedList.filter(
+      (item) => item.id !== newBookList.book_id,
+    );
+
+
+    setFinishedList(newState);
+  }
 
   return (
     <div>
       <h1 className="text-center m-4">Gelesene Bücher</h1>
       <div>
-        {list.map((item) => {
+        {finishedList.map((item) => {
           return (
             <div key={item.id} className="flex mt-8 overflow-auto">
               {' '}
@@ -33,7 +50,7 @@ export default function FinishedBooks(props) {
                     : 'Author unknowen'}
                 </p>
 
-                {/*} <button onClick={() => deleteHandler(item.id)}>❌</button> {*/}
+                <button onClick={() => deleteHandler(item.id)}>❌</button>
               </div>
             </div>
           );

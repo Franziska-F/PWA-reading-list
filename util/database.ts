@@ -153,6 +153,20 @@ export async function getBooksToRead(userId: number) {
 
   return books;
 }
+// Get one book by bookId and current status 'reading"
+
+export async function getBookByBookId(bookId: string) {
+  const book = await sql`
+  SELECT
+ *
+  FROM
+  books
+  WHERE
+  book_id = ${bookId}
+  AND current_status = 'reading'`;
+
+  return book;
+}
 
 // Get all finished books of one user
 
@@ -169,16 +183,28 @@ export async function getFinishedBooks(userId: number) {
   return finishedBooks;
 }
 
-// Delte a book from readingList by bookID
+// Delete a book from readingList by bookID
 export async function deleteBookById(bookId: string, userId: number) {
-  const [updatedBooks] = await sql`
+  const [deletedBook] = await sql`
 DELETE
 FROM books
 WHERE
-book_id = ${bookId} AND user_id = ${userId}
+book_id = ${bookId} AND user_id = ${userId} AND current_status = 'reading'
 RETURNING *`;
 
-  return updatedBooks;
+  return deletedBook;
+}
+
+// Delete a book from readingList by bookID
+export async function deleteFinishedBookById(bookId: string, userId: number) {
+  const [deleteFinishedBook] = await sql`
+DELETE
+FROM books
+WHERE
+book_id = ${bookId} AND user_id = ${userId} AND current_status = 'done'
+RETURNING *`;
+
+  return deleteFinishedBook;
 }
 
 // Change state of book in reading list by bookId

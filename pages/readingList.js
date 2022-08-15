@@ -105,5 +105,6 @@ export async function getServerSideProps(context) {
 
   return {
     props: {},
+    // Redirection is missing!
   };
 }
