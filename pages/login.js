@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-export default function Login() {
+export default function Login(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
@@ -20,7 +20,7 @@ export default function Login() {
       }),
     });
     const loginResponseBody = (await loginResponse).json();
-    console.log('login', loginResponseBody);
+    props.displayBookCount();
 
     if ('errors' in loginResponseBody) {
       setErrors(loginResponseBody.errors);

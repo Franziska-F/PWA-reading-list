@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import { getValidUser } from '../util/database';
 
 export default function Home(props) {
   const [title, setTitle] = useState('');
@@ -96,4 +97,23 @@ export default function Home(props) {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const user = await getValidUser(context.req.cookies.sessionToken);
+
+  if (user) {
+    return {
+      props: {
+        user: user,
+      },
+    };
+  }
+
+  return {
+    redirect: {
+      destination: `/login`,
+      permanent: false,
+    },
+  };
 }

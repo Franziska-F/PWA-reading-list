@@ -17,7 +17,6 @@ export default function FinishedBooks(props) {
       (item) => item.id !== newBookList.book_id,
     );
 
-
     setFinishedList(newState);
   }
 
@@ -61,21 +60,20 @@ export default function FinishedBooks(props) {
 }
 export async function getServerSideProps(context) {
   const user = await getValidUser(context.req.cookies.sessionToken);
-
-  const responseBookId = await getFinishedBooks(user.id);
-
-  const bookId = await JSON.parse(JSON.stringify(responseBookId));
-
-  const books = await Promise.all(
-    bookId.map(async (item) => {
-      const res = await fetch(
-        `https://books.googleapis.com/books/v1/volumes/${item.book_id}`,
-      );
-      return await res.json();
-    }),
-  );
-
   if (user) {
+    const responseBookId = await getFinishedBooks(user.id);
+
+    const bookId = await JSON.parse(JSON.stringify(responseBookId));
+
+    const books = await Promise.all(
+      bookId.map(async (item) => {
+        const res = await fetch(
+          `https://books.googleapis.com/books/v1/volumes/${item.book_id}`,
+        );
+        return await res.json();
+      }),
+    );
+
     return {
       props: {
         user: user,
@@ -85,6 +83,9 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: {},
+    redirect: {
+      destination: `/login`,
+      permanent: false,
+    },
   };
 }

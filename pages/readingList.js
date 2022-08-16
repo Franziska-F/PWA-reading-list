@@ -21,7 +21,7 @@ export default function ReadingList(props) {
   }
 
   async function doneHandler(id) {
-     await fetch(`../api/books/${id}`, {
+    await fetch(`../api/books/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -81,20 +81,20 @@ export default function ReadingList(props) {
 export async function getServerSideProps(context) {
   const user = await getValidUser(context.req.cookies.sessionToken);
 
-  const responseBookId = await getBooksToRead(user.id);
-
-  const bookId = await JSON.parse(JSON.stringify(responseBookId));
-
-  const test = await Promise.all(
-    bookId.map(async (item) => {
-      const res = await fetch(
-        `https://books.googleapis.com/books/v1/volumes/${item.book_id}`,
-      );
-      return await res.json();
-    }),
-  );
-
   if (user) {
+    const responseBookId = await getBooksToRead(user.id);
+
+    const bookId = await JSON.parse(JSON.stringify(responseBookId));
+
+    const test = await Promise.all(
+      bookId.map(async (item) => {
+        const res = await fetch(
+          `https://books.googleapis.com/books/v1/volumes/${item.book_id}`,
+        );
+        return await res.json();
+      }),
+    );
+
     return {
       props: {
         user: user,
@@ -104,7 +104,9 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: {},
-    // Redirection is missing!
+    redirect: {
+      destination: `/login`,
+      permanent: false,
+    },
   };
 }
