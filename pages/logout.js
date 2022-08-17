@@ -5,7 +5,7 @@ export default function Logout() {
   return null;
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context, props) {
   const token = context.req.cookies.sessionToken;
 
   if (token) {
@@ -18,6 +18,7 @@ export async function getServerSideProps(context) {
         path: '/',
       }),
     );
+    props.props.displayBookCount();
   }
 
   return {
