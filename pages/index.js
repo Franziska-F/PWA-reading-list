@@ -29,6 +29,8 @@ export default function Home(props) {
     });
 
     const onListResponseBody = await onListResponse.json();
+
+    console.log('book', onListResponseBody)
     props.displayBookCount();
   }
 

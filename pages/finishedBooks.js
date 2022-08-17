@@ -20,6 +20,8 @@ export default function FinishedBooks(props) {
     setFinishedList(newState);
   }
 
+  
+
   return (
     <div>
       <h1 className="text-center m-4">Gelesene Bücher</h1>
