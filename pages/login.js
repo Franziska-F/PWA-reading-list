@@ -44,39 +44,47 @@ export default function Login(props) {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1 className="text-center m-8">Login</h1>
+      <div className="flex justify-center items-center flex-col">
+        <label className=" mx-4" htmlFor="username">
+          Username
+        </label>
+        <input
+          className="border border-black m-4 w-2/3"
+          id="username"
+          placeholder="Username"
+          value={username}
+          onChange={(event) => {
+            setUsername(event.currentTarget.value);
+          }}
+        />
 
-      <label htmlFor="username">Username</label>
-      <input
-        id="username"
-        placeholder="Username"
-        className="border border-black"
-        value={username}
-        onChange={(event) => {
-          setUsername(event.currentTarget.value);
-        }}
-      />
-
-      <label htmlFor="password">Password</label>
-      <input
-        id="password"
-        placeholder="Password"
-        type="password"
-        className="border border-black"
-        value={password}
-        onChange={(event) => {
-          setPassword(event.currentTarget.value);
-        }}
-      />
-      <button
-        onClick={() =>
-          loginHandler().catch(() => {
-            console.log('Login failed');
-          })
-        }
-      >
-        Login
-      </button>
+        <label className="mx-4" htmlFor="password">
+          Password
+        </label>
+        <input
+          className="border border-black m-4 w-2/3"
+          id="password"
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChange={(event) => {
+            setPassword(event.currentTarget.value);
+          }}
+        />
+      </div>
+      <div className="flex justify-center items-center  ">
+        <button
+          className="border border-black w-1/2 mt-4"
+          onClick={() =>
+            loginHandler().catch(() => {
+              console.log('Login failed');
+            })
+          }
+        >
+          Login
+        </button>
+      </div>
       {errors.map((error) => (
         <div key={`error-${error.message}`}>{error.message}</div>
       ))}
