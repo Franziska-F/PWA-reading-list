@@ -5,6 +5,7 @@ export default function Header(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [bookCount, setBookCount] = useState(props.bookList);
 
+  // login should only visible when not loged in! 
   return (
     <div className="bg-yellow-600 h-14">
       <div className="hidden md:flex justify-evenly">

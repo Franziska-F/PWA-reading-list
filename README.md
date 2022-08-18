@@ -1,34 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# a readingList
 
-## Getting Started
+## Description
 
-First, run the development server:
+The readingList is a simple progressive web app to help you to remember what you want to read next and to keep track of all the wonderfull books you have read.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+It is a fullstack application, built with React and Next.js, written in JavaScript and TypeScript. The application is mobile first and styled with Tailwind CSS.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- Registration and log in
+- Passwords are stored as hash
+- Session tokens,
+- Book search, using google books API
+- Dynamic generated pages
+- A reading List
+- A list for books you have read
+- Secure API routes
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Possible Features
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Sending a book to a friend
+- Show the latest search requests
+- Show bestsellers
 
-## Learn More
+## Technologies
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js
+- React
+- TypeScript
+- JavaScript
+- PostgreSQL
+- Tailwind CSS
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Libarys
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Resources
 
-## Deploy on Vercel
+Wireframe on Figma: https://www.figma.com/file/SYfXvT5mK4BuG1Fpm3gLbX/Reading-List?node-id=0%3A1
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Setup instructions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Clone the repository with `git clone <repo>`
+- Setup the database by downloading and installing PostgreSQL
+- Create a user and a database
+- Create a new file `.env`
+- Copy the environment variables from `.env-example` into `.env`
+- Replace the placeholders xxxxx with your username, password and name of database
+- Install dotenv-cli with `yarn add dotenv-cli`
+- Run `yarn install` in your command line
+- Run the migrations with `yarn migrate up`
+- Start the server by running `yarn dev`
