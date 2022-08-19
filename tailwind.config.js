@@ -5,7 +5,15 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        main: ['Roboto'],
+      },
+      backgroundImage: {
+        'hero-img': "url('/img/libery.jpg')",
+      },
+      colors: {},
+    },
   },
   plugins: [],
 };
