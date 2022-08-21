@@ -43,7 +43,7 @@ export default function Login(props) {
   }
 
   return (
-    <div>
+    <div className="relative">
       <div className="bg-hero-img bg-center bg-cover h-96 relative">
         <h1
           className="text-center text-white text-4xl font-bold leading-10 pt-16
@@ -53,11 +53,22 @@ export default function Login(props) {
         </h1>
 
         <svg
-          className="w-full  fill-white  stroke-0 absolute bottom-0"
-          viewBox="0 0 2217 355"
+          className="w-full h-1/2   bottom-0 left-0 absolute translate-y-6 "
+          viewBox="0 0 100% 355"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M0 0C510.236 349.94 1184 0 2217 0V355H0V0Z" />
+          <path fill="red">
+            <animate
+              repeatCount="indefinite"
+              fill="freeze"
+              dur="10s"
+              attributeName="d"
+              values="M0 0C510.236 349.94 1184 0 2217 0V355H0V0Z;
+              MO 0.000244141C325.653 232.429 1171.17 67.1622 2217 0.000244141V355H0V0.000244141Z;
+              M0 16.4112C223.574 -92.0714 1724.89 386.76 2217 16.4112V371.411H0V16.4112Z;
+              M0 0C510.236 349.94 1184 0 2217 0V355H0V0Z"
+            />
+          </path>
         </svg>
       </div>
       <div>
