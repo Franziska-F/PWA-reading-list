@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function Header(props) {
+export default function NavBar(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [bookCount, setBookCount] = useState(props.bookList);
 
   // login should only visible when not loged in!
   return (
-    <div className=" h-14">
-      <div className="hidden md:flex justify-evenly">
+    <div className="bg-transparent text-white">
+      <div className="hidden md:flex justify-evenly ">
         <span>📚</span>
         <span>{bookCount}</span>
         <Link href="/register">Register</Link>
@@ -16,9 +16,8 @@ export default function Header(props) {
         <Link href="/logout">Logout</Link>
         <Link href="/finishedBooks">Gelesene Bücher</Link>
       </div>
-      <div className="flex justify-between relative md:hidden">
+      <div className="flex justify-between sticky top-0 md:hidden">
         <div>
-          {console.log('bookCount', bookCount)}
           <span>📚</span> <span>{props.bookList.length}</span>
         </div>
         <div className="realative">
@@ -39,7 +38,7 @@ export default function Header(props) {
         <div className={isOpen ? '  ' : 'hidden'}>
           {' '}
           <button
-            className="close-icon absolute top-0 right-0  bg-gray-600 h-14 w-14"
+            className="close-icon absolute top-0 right-0  bg-gray-600 w-14"
             onClick={() => setIsOpen(false)}
           >
             ❌

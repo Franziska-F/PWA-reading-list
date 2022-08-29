@@ -12,7 +12,9 @@ module.exports = {
       backgroundImage: {
         'hero-img': "url('/img/libery.jpg')",
       },
-      colors: {},
+      colors: {
+        'main-bg': '#393a4e',
+      },
     },
   },
   plugins: [],
