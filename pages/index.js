@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import NavBar from '../components/NavBar';
 import { getValidUser } from '../util/database';
 
 export default function Home(props) {
@@ -30,24 +31,33 @@ export default function Home(props) {
 
     const onListResponseBody = await onListResponse.json();
 
-    console.log('book', onListResponseBody)
+    console.log('book', onListResponseBody);
     props.displayBookCount();
   }
 
   return (
-    <>
-      <h1 className="text-center my-4">Was willst du als nächstes lesen?</h1>
+    <div className="bg-main-bg text-white h-screen">
+      <NavBar
+        bookList={props.bookList}
+        setBookList={props.setBookList}
+        user={props.user}
+        Leseliste="deine Leseliste"
+      />
+
+      <h1 className="text-center mt-14 mb-12 text-xl">
+        Was willst du als nächstes lesen?
+      </h1>
       <div className="flex  justify-center items-center flex-col">
         <input
-          className=" border border-black rounded focus:border-blue-400 py-2 px-3 w-2/3 mx-8 -z-1 relative"
+          className=" border border-black rounded-full focus:border-blue-400 py-2 px-3 w-2/3 mx-8 -z-1 text-black"
           value={title}
           onChange={(event) => {
             setTitle(event.currentTarget.value);
           }}
         />
-        <div className="w-1/4">
+        <div className="w-1/4 mt-8">
           <button
-            className="bg-yellow-300 w-full rounded text-black my-4"
+            className="bg-btn w-full rounded-full text-black my-4"
             onClick={() => handleSearch()}
           >
             Suchen
@@ -97,7 +107,7 @@ export default function Home(props) {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

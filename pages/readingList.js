@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import NavBar from '../components/NavBar';
 import { getBooksToRead, getValidUser } from '../util/database';
 
 export default function ReadingList(props) {
@@ -32,7 +33,15 @@ export default function ReadingList(props) {
   }
 
   return (
-    <div>
+    <div className="bg-main-bg text-white h-screen">
+      <div>
+        <NavBar
+          bookList={props.bookList}
+          setBookList={props.setBookList}
+          user={props.user}
+          Leseliste={''}
+        />
+      </div>
       <h1 className="text-center m-4">Deine Leseliste</h1>
       <div>
         {list.map((item) => {
@@ -80,7 +89,8 @@ export default function ReadingList(props) {
 }
 export async function getServerSideProps(context) {
   const user = await getValidUser(context.req.cookies.sessionToken);
-
+ // const readingListHeader = context;
+ // console.log('params', readingListHeader);
   if (user) {
     const responseBookId = await getBooksToRead(user.id);
 
