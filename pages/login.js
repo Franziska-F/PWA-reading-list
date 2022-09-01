@@ -46,13 +46,8 @@ export default function Login(props) {
   return (
     <div className="relative">
       <div className="bg-hero-img bg-center bg-cover h-96 relative">
-        <NavBar
-          bookList={props.bookList}
-          setBookList={props.setBookList}
-          user={props.user}
-        />
         <h1
-          className="text-center text-white text-4xl font-bold leading-10 pt-16
+          className="text-center text-white text-4xl font-bold leading-10 pt-24
         px-8"
         >
           Remember all those books!
@@ -82,7 +77,7 @@ export default function Login(props) {
         </svg>
       </div>
       <div className="bg-main-bg text-white">
-        <h2 className="text-center text-xl tracking-wide mb-6 pb-4">Login</h2>
+        <h2 className="text-center text-2xl tracking-wide mb-6 pb-4">Login</h2>
         <div className="flex justify-center items-center flex-col">
           <label className=" mx-4" htmlFor="username">
             Username
@@ -113,7 +108,8 @@ export default function Login(props) {
         </div>
         <div className="flex justify-center items-center  ">
           <button
-            className="border bg-btn text-main-bg  rounded-full w-1/4 mt-4 mb-8 "
+            className=" bg-gradient-to-l from-btn
+            text-white  rounded-full w-1/4 p-2 mt-4 mb-8 hover:scale-110"
             onClick={() =>
               loginHandler().catch(() => {
                 console.log('Login failed');

@@ -43,19 +43,18 @@ export default function ReadingList(props) {
         />
       </div>
       <h1 className="text-center m-4">Deine Leseliste</h1>
-      <div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-8 px-8  overlow-auto">
         {list.map((item) => {
           return (
-            <div key={item.id} className="flex mt-8 overflow-auto">
+            <div
+              key={item.id}
+              className="flex justify-center items-center py-4 bg-container rounded-md  shadow-md shadow-[#10111c] hover:scale-105"
+            >
               {' '}
               {item.volumeInfo.imageLinks !== undefined ? (
                 <img
                   className="rounded m-4"
-                  src={
-                    item.volumeInfo.imageLinks !== undefined
-                      ? item.volumeInfo.imageLinks.thumbnail
-                      : ''
-                  }
+                  src={item.volumeInfo.imageLinks.thumbnail}
                   alt="bookcover"
                 />
               ) : (
@@ -76,7 +75,7 @@ export default function ReadingList(props) {
                     })
                   }
                 >
-                  🐝
+                  ✅
                 </button>
                 <button onClick={() => deleteHandler(item.id)}>❌</button>
               </div>
@@ -89,8 +88,8 @@ export default function ReadingList(props) {
 }
 export async function getServerSideProps(context) {
   const user = await getValidUser(context.req.cookies.sessionToken);
- // const readingListHeader = context;
- // console.log('params', readingListHeader);
+  // const readingListHeader = context;
+  // console.log('params', readingListHeader);
   if (user) {
     const responseBookId = await getBooksToRead(user.id);
 

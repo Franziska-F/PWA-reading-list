@@ -15,15 +15,17 @@ export default function NavBar(props) {
           <span>{props.bookList.length}</span>
         </div>
         <Link href="/register">Register</Link>
-
         {props.user ? (
           <Link href="/logout">Logout</Link>
         ) : (
           <Link href="/login">Login</Link>
         )}
-        <Link href="/readingList">{props.Leseliste}</Link>
+        {props.Leseliste ? (
+          <Link href="/readingList">Deine Leseliste</Link>
+        ) : (
+          ''
+        )}
         <Link href="/finishedBooks">Gelesene Bücher</Link>
-
         <Link href="/">Home</Link>
       </div>
       {/* } on small screens {*/}

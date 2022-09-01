@@ -36,76 +36,73 @@ export default function Home(props) {
   }
 
   return (
-    <div className="bg-main-bg text-white h-screen">
+    <div className="bg-main-bg text-white min-h-screen pb-8">
       <NavBar
         bookList={props.bookList}
         setBookList={props.setBookList}
         user={props.user}
-        Leseliste="deine Leseliste"
+        Leseliste="Leseliste"
       />
-
-      <h1 className="text-center mt-14 mb-12 text-xl">
-        Was willst du als nächstes lesen?
-      </h1>
-      <div className="flex  justify-center items-center flex-col">
-        <input
-          className=" border border-black rounded-full focus:border-blue-400 py-2 px-3 w-2/3 mx-8 -z-1 text-black"
-          value={title}
-          onChange={(event) => {
-            setTitle(event.currentTarget.value);
-          }}
-        />
-        <div className="w-1/4 mt-8">
-          <button
-            className="bg-btn w-full rounded-full text-black my-4"
-            onClick={() => handleSearch()}
-          >
-            Suchen
-          </button>{' '}
+      <div className="bg-container py-8 mx-8 mb-8 rounded-md shadow-md shadow-[#10111c]">
+        <h1 className="text-center mt-14 mb-12 text-2xl">
+          Was willst du als nächstes lesen?
+        </h1>
+        <div className="flex  justify-center items-center flex-col">
+          <input
+            className=" border border-black rounded-full focus:border-blue-400 py-2 px-3 w-2/3 mx-8 -z-1 text-black"
+            value={title}
+            onChange={(event) => {
+              setTitle(event.currentTarget.value);
+            }}
+          />
+          <div className="w-1/4 mt-8">
+            <button
+              className=" w-full rounded-full text-white p-2 my-4 bg-gradient-to-l from-btn hover:scale-110"
+              onClick={() => handleSearch()}
+            >
+              Suchen
+            </button>{' '}
+          </div>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-8 px-8 ">
-          {result.map((item) => {
-            return (
-              <div
-                className="flex justify-center items-center py-4"
-                key={item.id}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-8 px-8  overlow-auto">
+        {result.map((item) => {
+          return (
+            <div
+              className="flex justify-center items-center py-4 bg-container rounded-md  shadow-md shadow-[#10111c] hover:scale-105"
+              key={item.id}
+            >
+              <a href={`/books/${item.id}`}>
+                <div className="flex justify-center items-center">
+                  {item.volumeInfo.imageLinks !== undefined ? (
+                    <img
+                      className="rounded"
+                      src={item.volumeInfo.imageLinks.thumbnail}
+                      alt="bookcover"
+                    />
+                  ) : (
+                    <p>No cover available!</p>
+                  )}
+                </div>
+                <div className="my-4 text-center">
+                  <p>{item.volumeInfo.title}</p>
+                  <p>
+                    {item.volumeInfo.authors
+                      ? item.volumeInfo.authors[0]
+                      : 'Unknowen'}
+                  </p>
+                </div>
+              </a>
+              <button
+                className="rounded-md text-black m-4 p-2 px-4 bg-gradient-to-l from-btn hover:scale-110"
+                onClick={() => putOnList(item.id)}
               >
-                <a href={`/books/${item.id}`}>
-                  <div className="flex justify-center items-center">
-                    {item.volumeInfo.imageLinks !== undefined ? (
-                      <img
-                        className="rounded"
-                        src={
-                          item.volumeInfo.imageLinks !== undefined
-                            ? item.volumeInfo.imageLinks.thumbnail
-                            : ''
-                        }
-                        alt="bookcover"
-                      />
-                    ) : (
-                      <p>No cover available!</p>
-                    )}
-                  </div>
-                  <div className="my-4 text-center">
-                    <p>{item.volumeInfo.title}</p>
-                    <p>
-                      {item.volumeInfo.authors
-                        ? item.volumeInfo.authors[0]
-                        : 'Unknowen'}
-                    </p>
-                  </div>
-                </a>
-                <button
-                  className="bg-yellow-300 w-6 h-6 rounded-md text-black my-4 m-4"
-                  onClick={() => putOnList(item.id)}
-                >
-                  📚
-                </button>
-              </div>
-            );
-          })}
-        </div>
+                📚
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

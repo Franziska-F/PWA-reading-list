@@ -15,6 +15,7 @@ module.exports = {
       colors: {
         'main-bg': '#393a4e',
         btn: '#E0B197',
+        container: '#262735',
       },
     },
   },
