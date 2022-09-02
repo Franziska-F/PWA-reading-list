@@ -43,6 +43,7 @@ export default function Home(props) {
         user={props.user}
         readingList="readingList"
         finishedBooks="finishedBooks"
+        registration="registration"
       />
       <div className="bg-container py-8 mx-8 mb-8 rounded-md shadow-md shadow-[#10111c]">
         <h1 className="text-center mt-14 mb-12 text-2xl">

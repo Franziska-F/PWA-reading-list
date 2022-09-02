@@ -41,6 +41,7 @@ export default function ReadingList(props) {
           user={props.user}
           readingList=""
           finishedBooks="finishedBooks"
+          registration=""
         />
       </div>
       <h1 className="text-center text-2xl m-8 ">Deine Leseliste</h1>

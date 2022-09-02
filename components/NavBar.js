@@ -14,7 +14,8 @@ export default function NavBar(props) {
           <span className="p-2">📚</span>
           <span>{props.bookList.length}</span>
         </div>
-        <Link href="/register">Register</Link>
+        {props.registration ? (
+        <Link href="/register">Register</Link>) : ("")}
         {props.user ? (
           <Link href="/logout">Logout</Link>
         ) : (
