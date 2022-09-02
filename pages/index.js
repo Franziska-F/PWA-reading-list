@@ -41,7 +41,8 @@ export default function Home(props) {
         bookList={props.bookList}
         setBookList={props.setBookList}
         user={props.user}
-        Leseliste="Leseliste"
+        readingList="readingList"
+        finishedBooks="finishedBooks"
       />
       <div className="bg-container py-8 mx-8 mb-8 rounded-md shadow-md shadow-[#10111c]">
         <h1 className="text-center mt-14 mb-12 text-2xl">

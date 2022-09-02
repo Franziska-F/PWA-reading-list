@@ -39,10 +39,11 @@ export default function ReadingList(props) {
           bookList={props.bookList}
           setBookList={props.setBookList}
           user={props.user}
-          Leseliste={''}
+          readingList=""
+          finishedBooks="finishedBooks"
         />
       </div>
-      <h1 className="text-center m-4">Deine Leseliste</h1>
+      <h1 className="text-center text-2xl m-8 ">Deine Leseliste</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-8 px-8  overlow-auto">
         {list.map((item) => {
           return (

@@ -20,13 +20,18 @@ export default function NavBar(props) {
         ) : (
           <Link href="/login">Login</Link>
         )}
-        {props.Leseliste ? (
+        {props.readingList ? (
           <Link href="/readingList">Deine Leseliste</Link>
         ) : (
           ''
         )}
-        <Link href="/finishedBooks">Gelesene Bücher</Link>
-        <Link href="/">Home</Link>
+        {props.finishedBooks ? (
+          <Link href="/finishedBooks">Gelesene Bücher</Link>
+        ) : (
+          ''
+        )}
+
+        <Link href="/">Suche</Link>
       </div>
       {/* } on small screens {*/}
       <div className="flex justify-between items-center h-14 md:hidden">
@@ -34,7 +39,7 @@ export default function NavBar(props) {
           <span>📚</span> <span>{props.bookList.length} </span>
         </div>
         <div>
-          <Link href="/readingList">{props.Leseliste}</Link>
+          <Link href="/readingList">{props.readingList}</Link>
         </div>
         <div>
           <button
@@ -72,8 +77,17 @@ export default function NavBar(props) {
                 <Link href="/login">Login</Link>
               )}
 
-              <Link href="/">Home</Link>
-              <Link href="/finishedBooks">Gelesene Bücher</Link>
+              <Link href="/">Suche</Link>
+              {props.readingList ? (
+                <Link href="/readingList">Deine Leseliste</Link>
+              ) : (
+                ''
+              )}
+              {props.finishedBooks ? (
+                <Link href="/finishedBooks">Gelesene Bücher</Link>
+              ) : (
+                ''
+              )}
             </div>
           </div>
         </div>

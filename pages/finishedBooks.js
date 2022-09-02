@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import NavBar from '../components/NavBar';
 import { getFinishedBooks, getValidUser } from '../util/database';
 
 export default function FinishedBooks(props) {
@@ -20,24 +21,28 @@ export default function FinishedBooks(props) {
     setFinishedList(newState);
   }
 
-  
-
   return (
-    <div>
-      <h1 className="text-center m-4">Gelesene Bücher</h1>
-      <div>
+    <div className="bg-main-bg text-white min-h-screen pb-8">
+      <NavBar
+        bookList={props.bookList}
+        setBookList={props.setBookList}
+        user={props.user}
+        readingList="readingList"
+        finishedBooks=""
+      />
+      <h1 className="text-center text-2xl m-8">Gelesene Bücher</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-8 px-8  overlow-auto">
         {finishedList.map((item) => {
           return (
-            <div key={item.id} className="flex mt-8 overflow-auto">
+            <div
+              key={item.id}
+              className="flex justify-center items-center py-4 bg-container rounded-md  shadow-md shadow-[#10111c] hover:scale-105"
+            >
               {' '}
               {item.volumeInfo.imageLinks !== undefined ? (
                 <img
                   className="rounded m-4"
-                  src={
-                    item.volumeInfo.imageLinks !== undefined
-                      ? item.volumeInfo.imageLinks.thumbnail
-                      : ''
-                  }
+                  src={item.volumeInfo.imageLinks.thumbnail}
                   alt="bookcover"
                 />
               ) : (
@@ -51,7 +56,12 @@ export default function FinishedBooks(props) {
                     : 'Author unknowen'}
                 </p>
 
-                <button onClick={() => deleteHandler(item.id)}>❌</button>
+                <button
+                  className="m-2 hover:scale-110"
+                  onClick={() => deleteHandler(item.id)}
+                >
+                  ❌
+                </button>
               </div>
             </div>
           );
