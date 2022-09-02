@@ -10,7 +10,7 @@ export default async function bookHandler(req, res) {
 
     const allBooksOfUser = await getBooksToRead(user.id);
 
-    console.log('API', allBooksOfUser);
+  
     return res.status(200).json(allBooksOfUser);
   }
   if (req.method === 'POST') {

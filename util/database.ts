@@ -210,7 +210,7 @@ RETURNING *`;
 // Change state of book in reading list by bookId
 
 export async function changeBookStatusById(bookId: string, userId: number) {
-  const finishedBook = await sql`
+  const [finishedBook] = await sql`
   UPDATE
   books
   SET

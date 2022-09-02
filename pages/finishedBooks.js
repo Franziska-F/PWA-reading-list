@@ -63,6 +63,12 @@ export default function FinishedBooks(props) {
                 >
                   ❌
                 </button>
+                <a
+                  className="m-2"
+                  href={`mailto:?subject=Buchempfehlung&body=https://play.google.com/store/books/details?id=${item.id}`}
+                >
+                  ✉️
+                </a>
               </div>
             </div>
           );

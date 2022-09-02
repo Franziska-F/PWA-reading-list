@@ -22,12 +22,14 @@ export default function ReadingList(props) {
   }
 
   async function doneHandler(id) {
-    await fetch(`../api/books/${id}`, {
+    const doneBookAnswer = await fetch(`../api/books/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
     });
+    const doneBook = await doneBookAnswer.json();
 
-    const newState = list.filter((item) => item.current_status === 'reading');
+    const newState = list.filter((item) => item.id !== doneBook.book_id);
+
     setList(newState);
     props.displayBookCount();
   }
