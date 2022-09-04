@@ -47,7 +47,7 @@ export default function NavBar(props) {
         <Link href="/">Suche</Link>
       </div>
       {/* } on small screens {*/}
-      <div className="flex justify-between items-center h-14 md:hidden">
+      <div className="flex justify-between items-center h-14 pl-8 pr-5 md:hidden">
         <div className="flex">
           {' '}
           <span className="p-2">
@@ -89,13 +89,27 @@ export default function NavBar(props) {
           {/* } Open menue {*/}
           <div
             className="flex bg-black/75 absolute right-0 -top-4 z-10 text-white h-80 w-80"
-            onClick={() => setIsOpen(false)}
+           
           >
             <button
               className="close-icon absolute top-4 right-0 m-4 leading-3 "
               onClick={() => setIsOpen(false)}
             >
-              X
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 67 67"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 5L62.593 62.593M5 62.593L62.593 5"
+                  stroke="white"
+                  strokeWidth="8.22758"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </button>
             <div className=" flex flex-col p-4 mt-8 w-full text-center">
               <Link href="/register">Register</Link>

@@ -27,7 +27,7 @@ export default function FinishedBooks(props) {
         bookList={props.bookList}
         setBookList={props.setBookList}
         user={props.user}
-        readingList="readingList"
+        readingList="Deine Leseliste"
         finishedBooks=""
         registration=""
       />

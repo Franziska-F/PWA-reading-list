@@ -41,7 +41,7 @@ export default function Home(props) {
         bookList={props.bookList}
         setBookList={props.setBookList}
         user={props.user}
-        readingList="Leseliste"
+        readingList="Deine Leseliste"
         finishedBooks="finishedBooks"
         registration="registration"
       />
