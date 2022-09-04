@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import NavBar from '../components/NavBar';
 
 export default function Login(props) {
   const [username, setUsername] = useState('');

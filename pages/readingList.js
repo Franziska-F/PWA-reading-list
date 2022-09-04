@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import NavBar from '../components/NavBar';
 import { getBooksToRead, getValidUser } from '../util/database';
 
@@ -92,7 +92,10 @@ export default function ReadingList(props) {
                     />
                   </svg>
                 </button>
-                <button className="rounded-md text-black m-2 p-1 bg-gradient-to-l from-btn hover:scale-110" onClick={() => deleteHandler(item.id)}>
+                <button
+                  className="rounded-md text-black m-2 p-1 bg-gradient-to-l from-btn hover:scale-110"
+                  onClick={() => deleteHandler(item.id)}
+                >
                   <svg
                     width="20"
                     height="20"

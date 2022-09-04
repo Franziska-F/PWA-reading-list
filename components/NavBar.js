@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 export default function NavBar(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [bookCount, setBookCount] = useState(props.bookList);
+ 
 
   // login should only visible when not loged in!
   return (
@@ -89,7 +89,7 @@ export default function NavBar(props) {
           {/* } Open menue {*/}
           <div
             className="flex bg-black/75 absolute right-0 -top-4 z-10 text-white h-80 w-80"
-           
+
           >
             <button
               className="close-icon absolute top-4 right-0 m-4 leading-3 "
