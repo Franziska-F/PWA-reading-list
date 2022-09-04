@@ -35,7 +35,7 @@ export default function ReadingList(props) {
   }
 
   return (
-    <div className="bg-main-bg text-white h-screen">
+    <div className="bg-main-bg text-white min-h-screen">
       <div>
         <NavBar
           bookList={props.bookList}
@@ -72,16 +72,43 @@ export default function ReadingList(props) {
                     : 'Author unknowen'}
                 </p>
                 <button
-                  className="p-2 m-2 rounded"
+                  className="rounded-md text-black m-2 p-1 bg-gradient-to-l from-btn hover:scale-110"
                   onClick={() =>
                     doneHandler(item.id).catch(() => {
                       console.log('PUT request failed');
                     })
                   }
                 >
-                  ✅
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 58 58"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 32.4323L5.08756 27.3447L18.0043 40.2579L52.5055 5.75678L57.593 10.8443L18.0007 50.433L0 32.4323Z"
+                      fill="white"
+                    />
+                  </svg>
                 </button>
-                <button onClick={() => deleteHandler(item.id)}>❌</button>
+                <button className="rounded-md text-black m-2 p-1 bg-gradient-to-l from-btn hover:scale-110" onClick={() => deleteHandler(item.id)}>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 67 67"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 5L62.593 62.593M5 62.593L62.593 5"
+                      stroke="white"
+                      strokeWidth="8.22758"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
               </div>
             </div>
           );

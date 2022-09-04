@@ -41,7 +41,7 @@ export default function Home(props) {
         bookList={props.bookList}
         setBookList={props.setBookList}
         user={props.user}
-        readingList="readingList"
+        readingList="Leseliste"
         finishedBooks="finishedBooks"
         registration="registration"
       />
@@ -100,7 +100,18 @@ export default function Home(props) {
                 className="rounded-md text-black m-4 p-2 px-4 bg-gradient-to-l from-btn hover:scale-110"
                 onClick={() => putOnList(item.id)}
               >
-                📚
+                <svg
+                  width="12"
+                  height="23"
+                  viewBox="0 0 58 73"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M55.6733 7.67907C54.6136 7.67907 53.7535 8.53913 53.7535 9.59884V67.1919C53.7535 68.2516 52.8934 69.1116 51.8337 69.1116H9.59884C6.42354 69.1116 3.83954 66.5276 3.83954 63.3523C3.83954 60.177 6.42354 57.593 9.59884 57.593H44.1547C47.33 57.593 49.914 55.009 49.914 51.8337V5.7593C49.914 2.58401 47.33 0 44.1547 0H5.7593C2.58401 0 0 2.58401 0 5.7593V63.3523C0 68.6432 4.30796 72.9512 9.59884 72.9512H51.8337C55.009 72.9512 57.593 70.3672 57.593 67.1919V9.59884C57.593 8.53913 56.733 7.67907 55.6733 7.67907ZM5.7593 3.83954H44.1547C45.2144 3.83954 46.0744 4.69959 46.0744 5.7593V51.8337C46.0744 52.8934 45.2144 53.7535 44.1547 53.7535H9.59884C7.44102 53.7535 5.44446 54.4715 3.83954 55.6771V5.7593C3.83954 4.69959 4.69959 3.83954 5.7593 3.83954Z"
+                    fill="white"
+                  />
+                </svg>
               </button>
             </div>
           );
