@@ -8,13 +8,25 @@ export default async function bookHandler(req, res) {
   if (req.method === 'GET') {
     const user = await getValidUser(req.cookies.sessionToken);
 
+    if (!user) {
+      return res.status(400).json({
+        error: 'Session token not valid',
+      });
+    }
+
     const allBooksOfUser = await getBooksToRead(user.id);
 
-  
+
     return res.status(200).json(allBooksOfUser);
   }
   if (req.method === 'POST') {
     const user = await getValidUser(req.cookies.sessionToken);
+
+    if (!user) {
+      return res.status(400).json({
+        error: 'Session token not valid',
+      });
+    }
 
     const bookId = req.body.bookId;
 
