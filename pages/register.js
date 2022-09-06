@@ -37,6 +37,7 @@ export default function Register(props) {
         readingList=""
         finishedBooks=""
         registration=""
+        search=""
       />
 
       {/* } Container for registration {*/}
@@ -82,4 +83,24 @@ export default function Register(props) {
       </div>
     </div>
   );
+}
+
+export function getServerSideProps(context) {
+  // Redirect from HTTP to HTTPS on Heroku
+  if (
+    context.req.headers.host &&
+    context.req.headers['x-forwarded-proto'] &&
+    context.req.headers['x-forwarded-proto'] !== 'https'
+  ) {
+    return {
+      redirect: {
+        destination: `https://${context.req.headers.host}/register`,
+        permanent: true,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 }

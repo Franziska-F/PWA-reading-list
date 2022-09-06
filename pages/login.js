@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import RegisterNavBar from '../components/RegisterNavBar';
 
 export default function Login(props) {
   const [username, setUsername] = useState('');
@@ -45,6 +46,7 @@ export default function Login(props) {
   return (
     <div className="relative">
       <div className="bg-hero-img bg-center bg-cover h-96 relative">
+        <RegisterNavBar />
         <h1
           className="text-center text-white text-4xl font-bold leading-10 pt-24
         px-8"
@@ -124,4 +126,24 @@ export default function Login(props) {
       </div>
     </div>
   );
+}
+
+export function getServerSideProps(context) {
+  // Redirect from HTTP to HTTPS on Heroku
+  if (
+    context.req.headers.host &&
+    context.req.headers['x-forwarded-proto'] &&
+    context.req.headers['x-forwarded-proto'] !== 'https'
+  ) {
+    return {
+      redirect: {
+        destination: `https://${context.req.headers.host}/register`,
+        permanent: true,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 }

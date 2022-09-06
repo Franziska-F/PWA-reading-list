@@ -30,6 +30,7 @@ export default function FinishedBooks(props) {
         readingList="Deine Leseliste"
         finishedBooks=""
         registration=""
+        search=""
       />
       <h1 className="text-center text-2xl m-8">Gelesene Bücher</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-8 px-8  overlow-auto">

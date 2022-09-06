@@ -44,6 +44,7 @@ export default function ReadingList(props) {
           readingList=""
           finishedBooks="finishedBooks"
           registration=""
+          search="search"
         />
       </div>
       <h1 className="text-center text-2xl m-8 ">Deine Leseliste</h1>

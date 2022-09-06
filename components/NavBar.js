@@ -3,7 +3,6 @@ import { useState } from 'react';
 
 export default function NavBar(props) {
   const [isOpen, setIsOpen] = useState(false);
- 
 
   // login should only visible when not loged in!
   return (
@@ -27,12 +26,12 @@ export default function NavBar(props) {
           </span>
           <span className="p-1 ">{props.bookList.length}</span>
         </div>
-        {props.registration ? <Link href="/register">Register</Link> : ''}
         {props.user ? (
           <Link href="/logout">Logout</Link>
         ) : (
           <Link href="/login">Login</Link>
         )}
+        {props.search ? <Link href="/">Suche</Link> : ''}
         {props.readingList ? (
           <Link href="/readingList">Deine Leseliste</Link>
         ) : (
@@ -43,8 +42,6 @@ export default function NavBar(props) {
         ) : (
           ''
         )}
-
-        <Link href="/">Suche</Link>
       </div>
       {/* } on small screens {*/}
       <div className="flex justify-between items-center h-14 pl-8 pr-5 md:hidden">
@@ -87,10 +84,7 @@ export default function NavBar(props) {
         <div className={isOpen ? '  ' : 'hidden'}>
           {' '}
           {/* } Open menue {*/}
-          <div
-            className="flex bg-black/75 absolute right-0 -top-4 z-10 text-white h-80 w-80"
-
-          >
+          <div className="flex bg-black/75 absolute right-0 -top-4 z-10 text-white h-80 w-80">
             <button
               className="close-icon absolute top-4 right-0 m-4 leading-3 "
               onClick={() => setIsOpen(false)}
@@ -112,14 +106,12 @@ export default function NavBar(props) {
               </svg>
             </button>
             <div className=" flex flex-col p-4 mt-8 w-full text-center">
-              <Link href="/register">Register</Link>
               {props.user ? (
                 <Link href="/logout">Logout</Link>
               ) : (
                 <Link href="/login">Login</Link>
               )}
-
-              <Link href="/">Suche</Link>
+              {props.search ? <Link href="/">Suche</Link> : ''}
               {props.readingList ? (
                 <Link href="/readingList">Deine Leseliste</Link>
               ) : (
