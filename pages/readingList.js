@@ -47,9 +47,13 @@ export default function ReadingList(props) {
           search="search"
         />
       </div>
+
       <h1 className="text-center text-2xl m-8 ">Deine Leseliste</h1>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-8 px-8  overlow-auto">
-        {list.map((item) => {
+        {console.log('hello')}
+        {console.log({ list })}
+        {props.books.map((item) => {
           return (
             <div
               key={item.id}

@@ -153,7 +153,7 @@ export async function getBooksToRead(userId: number) {
 
   return books;
 }
-// Get one book by bookId and current status 'reading"
+// Get all  books by bookId and current status 'reading"
 
 export async function getBookByBookId(bookId: string) {
   const book = await sql`
@@ -163,6 +163,22 @@ export async function getBookByBookId(bookId: string) {
   books
   WHERE
   book_id = ${bookId}
+  AND current_status = 'reading'`;
+
+  return book;
+}
+
+// Get one book by bookId and userId
+
+export async function getBookByIdAndUserId(bookId: string, userId: number) {
+  const [book] = await sql`
+  SELECT
+ *
+  FROM
+  books
+  WHERE
+  book_id = ${bookId}
+  AND user_id = ${userId}
   AND current_status = 'reading'`;
 
   return book;

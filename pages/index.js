@@ -1,10 +1,27 @@
+import 'material-react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'material-react-toastify';
 import { useState } from 'react';
 import NavBar from '../components/NavBar';
 import { getValidUser } from '../util/database';
 
+toast.configure();
 export default function Home(props) {
   const [title, setTitle] = useState('');
   const [result, setResult] = useState([]);
+
+  const addedNotification = () => {
+    toast.dark('Added to your bookstack!', {
+      position: toast.POSITION.TOP_LEFT,
+      autoClose: 4000,
+    });
+  };
+
+  const notAddedNotification = () => {
+    toast.dark('This book is already on your bookstack!', {
+      position: toast.POSITION.TOP_LEFT,
+      autoClose: 4000,
+    });
+  };
 
   function handleSearch() {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${title}`)
@@ -29,8 +46,13 @@ export default function Home(props) {
     });
 
     const onListResponseBody = await onListResponse.json();
+    console.log(onListResponseBody);
 
-    console.log('book', onListResponseBody);
+    if (onListResponse.status === 400) {
+      notAddedNotification();
+    } else {
+      addedNotification();
+    }
     props.displayBookCount();
   }
 
@@ -113,6 +135,7 @@ export default function Home(props) {
                   />
                 </svg>
               </button>
+              <ToastContainer />
             </div>
           );
         })}
