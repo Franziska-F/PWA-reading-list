@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import { useCallback, useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 
-function MyApp({ Component, pageProps, props }) {
+function MyApp({ Component }) {
   const [bookList, setBookList] = useState([]);
 
   const displayBookCount = useCallback(async () => {
@@ -22,7 +22,6 @@ function MyApp({ Component, pageProps, props }) {
     <Layout bookList={bookList} setBookList={setBookList}>
       {' '}
       <Component
-        {...pageProps}
         bookList={bookList}
         setBookList={setBookList}
         displayBookCount={displayBookCount}
