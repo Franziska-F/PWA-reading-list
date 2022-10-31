@@ -171,6 +171,7 @@ export async function getBookByBookId(bookId: string) {
 // Get one book by bookId and userId
 
 export async function getBookByIdAndUserId(bookId: string, userId: number) {
+  if (!userId) return undefined;
   const [book] = await sql`
   SELECT
  *

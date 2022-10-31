@@ -60,7 +60,11 @@ export default function FinishedBooks(props) {
                 <div className="flex">
                   <button
                     className="rounded-md m-2 p-1 bg-gradient-to-l from-btn hover:scale-110"
-                    onClick={() => deleteHandler(item.id)}
+                    onClick={() => {
+                      deleteHandler(item.id).catch(() => {
+                        console.log('Delete request fails');
+                      });
+                    }}
                   >
                     <svg
                       width="20"

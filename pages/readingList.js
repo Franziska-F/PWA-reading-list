@@ -29,7 +29,7 @@ export default function ReadingList(props) {
     const doneBook = await doneBookAnswer.json();
 
     const newState = list.filter((item) => item.id !== doneBook.book_id);
-
+  
     setList(newState);
     props.displayBookCount();
   }
@@ -51,9 +51,8 @@ export default function ReadingList(props) {
       <h1 className="text-center text-2xl m-8 ">Deine Leseliste</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-8 px-8  overlow-auto">
-        {console.log('hello')}
-        {console.log({ list })}
-        {props.books.map((item) => {
+
+        {list.map((item) => {
           return (
             <div
               key={item.id}
@@ -72,7 +71,7 @@ export default function ReadingList(props) {
               <div className="p-4">
                 <p>{item.volumeInfo.title}</p>
                 <p>
-                  {item.volumeInfo.authors[0]
+                  {item.volumeInfo.authors
                     ? item.volumeInfo.authors[0]
                     : 'Author unknowen'}
                 </p>
@@ -99,7 +98,11 @@ export default function ReadingList(props) {
                 </button>
                 <button
                   className="rounded-md text-black m-2 p-1 bg-gradient-to-l from-btn hover:scale-110"
-                  onClick={() => deleteHandler(item.id)}
+                  onClick={() => {
+                    deleteHandler(item.id).catch(() => {
+                      console.log('Delete request fails');
+                    });
+                  }}
                 >
                   <svg
                     width="20"

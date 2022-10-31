@@ -30,9 +30,7 @@ export default async function bookHandler(req, res) {
 
     const bookId = req.body.bookId;
 
-    const isBook = await getBookByIdAndUserId(bookId, user.id);
-    console.log(isBook);
-    if (isBook) {
+    if (await getBookByIdAndUserId(bookId, user.id)) {
       res.status(400).json({
         errors: [{ message: 'This book is already on your readinglist' }],
       });
@@ -40,7 +38,7 @@ export default async function bookHandler(req, res) {
     }
 
     const createBook = await putBookonList(user.id, bookId);
-   
+
     return res.status(200).json(createBook);
   } else {
     res.status(405).json({ errors: [{ message: 'method not allowed' }] });

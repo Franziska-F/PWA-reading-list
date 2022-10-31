@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
     const bookCountResponse = await fetch('../api/books');
 
     const bookCountResponseBody = await bookCountResponse.json();
-    console.log('test', bookCountResponseBody);
+
     setBookList(bookCountResponseBody);
   }, []);
 
