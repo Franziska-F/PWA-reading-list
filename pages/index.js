@@ -135,10 +135,12 @@ export default function Home(props) {
                   />
                 </svg>
               </button>
-              <ToastContainer />
             </div>
           );
         })}
+        <div>
+          <ToastContainer />
+        </div>
       </div>
     </div>
   );
