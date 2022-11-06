@@ -8,12 +8,13 @@
     "start": "next start",
     "lint": "next lint",
     "migrate": "dotenv ley",
-    "heroku-postbuild": "yarn migrate up && yarn build"   
+    "heroku-postbuild": "yarn migrate up && yarn build"
   },
   "dependencies": {
     "autoprefixer": "^10.4.8",
     "bcrypt": "^5.0.1",
     "cookie": "^0.5.0",
+    "dotenv": "^16.0.3",
     "dotenv-safe": "^8.2.0",
     "material-react-toastify": "^1.0.1",
     "next": "12.2.3",
