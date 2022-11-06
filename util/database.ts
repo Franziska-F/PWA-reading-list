@@ -1,7 +1,10 @@
 import { config } from 'dotenv';
 import postgres from 'postgres';
+import setPostgresDefaultsOnHeroku from './setPostgresDefaultsOnHeroku';
 
 // import setPostgresDefaultsOnHeroku from './setPostgresDefaultsOnHeroku';
+
+setPostgresDefaultsOnHeroku();
 
 // setPostgresDefaultsOnHeroku();
 config();
