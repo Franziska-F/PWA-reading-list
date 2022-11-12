@@ -7,7 +7,16 @@
   "background_color": "#393A4E",
   "orientation": "portrait-primary",
   "icons": [
-    { "src": "/img/pwa_icon.png", "type": "image/png", "sizes": "128x128" }
+    {
+      "src": "/img/pwa-icon-128x128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/img/pwa-icon-144x144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    }
   ],
   "splash_pages": null
 }
