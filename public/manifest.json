@@ -2,20 +2,22 @@
   "name": "ReadingList Progressiv Web App",
   "short_name": "ReadingList",
   "start_url": "/",
+  "scope": "/",
 
   "display": "standalone",
   "background_color": "#393A4E",
+  "theme_color": "#1fd4c0",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/img/pwa-icon-128x128.png",
+      "src": "/img/pwa-icon-192x192.png",
       "type": "image/png",
-      "sizes": "128x128"
+      "sizes": "192x192"
     },
     {
-      "src": "/img/pwa-icon-144x144.png",
+      "src": "/img/pwa-icon-512x512.png",
       "type": "image/png",
-      "sizes": "144x144"
+      "sizes": "512x512"
     }
   ],
   "splash_pages": null
